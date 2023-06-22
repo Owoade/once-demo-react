@@ -15,6 +15,8 @@ import {
   Button,
   List,
   Image,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import { Logo } from "./Logo"
@@ -63,26 +65,45 @@ export const App = () => {
     once.checkout()
 
   }
-  return( <ChakraProvider theme={theme}>
-    <Box p={4} maxW="400px" mx="auto">
+  return (
+    <ChakraProvider theme={theme}>
+      <Box p={4} maxW="400px" mx="auto">
         <Heading as="h1" size="xl" mb={6}>
-          Cart Page
+         Your Cart
         </Heading>
         <List spacing={4} mb={6}>
           {items.map((item) => (
-            <ListItem key={item.id} fontSize="lg" display="flex" alignItems="center">
+            <ListItem
+              key={item.id}
+              fontSize="lg"
+              display="flex"
+              alignItems="center"
+            >
               <Image src={item.image} alt={item.name} boxSize="50px" mr={4} />
-              <Box>{item.name} - ₦{item._price}</Box>
+              <Box>
+                {item.name} - ₦{item._price}
+              </Box>
             </ListItem>
           ))}
         </List>
         <Box textAlign="right" fontWeight="bold" fontSize="xl" mb={6}>
           Total: ₦350,000
         </Box>
-        <Button onClick={handleSubmit} isLoading={loading} colorScheme="teal" size="lg" w="100%">
+        <Button
+          onClick={handleSubmit}
+          isLoading={loading}
+          colorScheme="teal"
+          size="lg"
+          w="100%"
+        >
           Checkout
         </Button>
+        <Alert borderRadius={"8px"} my={"2em"} status="warning">
+          <AlertIcon />
+          Ensure your browser doesn't block popups.
+        </Alert>
       </Box>
-    </ChakraProvider>)
+    </ChakraProvider>
+  );
  
 }
