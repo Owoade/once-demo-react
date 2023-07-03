@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import Once from "checkout-once";
 import {
   ChakraProvider,
@@ -17,59 +17,97 @@ import {
   Image,
   Alert,
   AlertIcon,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalHeader,
+  ModalCloseButton,
+  ModalContent,
+  ModalBody,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
+import { ColorModeSwitcher } from "./ColorModeSwitcher";
+import { Logo } from "./Logo";
 
 const items = [
   {
     id: 1,
-    name: 'Samsung Laptop',
+    name: "Samsung Laptop",
     price: 200000,
     _price: "200,000",
-    image: 'https://solaroidenergy.com/wp-content/uploads/2023/03/can-i-replace-laptop-with-ipad-pro.jpg',
+    image:
+      "https://solaroidenergy.com/wp-content/uploads/2023/03/can-i-replace-laptop-with-ipad-pro.jpg",
   },
   {
     id: 2,
-    name: 'Iphone XR',
+    name: "Iphone XR",
     price: 100000,
     _price: "100,000",
-    image: 'https://img.freepik.com/free-vector/realistic-display-smartphone-with-different-apps_52683-30241.jpg',
+    image:
+      "https://img.freepik.com/free-vector/realistic-display-smartphone-with-different-apps_52683-30241.jpg",
   },
   {
     id: 3,
-    name: 'Headphones',
+    name: "Headphones",
     price: 50000,
     _price: "50,000",
-    image: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6373/6373460_sd.jpg',
+    image:
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6373/6373460_sd.jpg",
   },
 ];
 
 const totalAmount = items.reduce((sum, item) => sum + item.price, 0);
 
 export const App = () => {
-  const [ loading, setLoading ] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
-  function handleSubmit(){
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  function handleSubmit() {
     setLoading(true);
 
     const once = new Once({
       amount: 35000000,
-      successCallback:() => {
+      successCallback: () => {
         setLoading(false);
-        window.alert("Transaction Successful");
-      }
-    })
+        onOpen();
+      },
+    });
 
-    once.checkout()
-
+    once.checkout();
   }
   return (
     <ChakraProvider theme={theme}>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Alert
+              status="success"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              height="200px"
+            >
+              <AlertIcon boxSize="40px" mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize="lg">
+                Transaction Successful
+              </AlertTitle>
+              <AlertDescription maxWidth="sm">
+              Thank you for your patronizing us. We are processing your order with care and look forward to delivering it soon.
+              </AlertDescription>
+            </Alert>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
       <Box p={4} maxW="400px" mx="auto">
         <Heading as="h1" size="xl" mb={6}>
-         Your Cart
+          Your Cart
         </Heading>
         <List spacing={4} mb={6}>
           {items.map((item) => (
@@ -105,5 +143,4 @@ export const App = () => {
       </Box>
     </ChakraProvider>
   );
- 
-}
+};
