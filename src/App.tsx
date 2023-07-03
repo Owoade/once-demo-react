@@ -82,7 +82,7 @@ export const App = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Thank you ☺</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Alert
