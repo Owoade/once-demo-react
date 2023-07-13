@@ -37,7 +37,7 @@ const items = [
     price: 200000,
     _price: "200,000",
     image:
-      "https://solaroidenergy.com/wp-content/uploads/2023/03/can-i-replace-laptop-with-ipad-pro.jpg",
+      "https://images.samsung.com/is/image/samsung/assets/us/galaxybooks/gb3-series/5316/NV06-GB3-PCD-FloatingNav-GB3Ultra-M.jpg?$FB_TYPE_J_F_MO_JPG$",
   },
   {
     id: 2,
